@@ -44,21 +44,21 @@ const parse = async () =>{
        });
     });
     // ~~~~~~~~~~~~[Дром ]~~~~~~~~~~~~~
-    // const DROM = await getHTML("https://petrozavodsk.drom.ru/auto/all/?minprice=8000&maxprice=30000")
+    const DROM = await getHTML("https://petrozavodsk.drom.ru/auto/all/?minprice=8000&maxprice=30000")
 
-    // DROM('.ListingItem-module__container').each((i,element) =>{
-    //     const name = DROM(element).find('.ListingItem-module__title').text()
-    //     const price = DROM(element).find('.ListingItemPrice-module__content').text()
-    //     const link = `${DROM(element).find('a').attr('href')}`
+    DROM('.ListingItem-module__container').each((i,element) =>{
+        const name = DROM(element).find('.ListingItem-module__title').text()
+        const price = DROM(element).find('.ListingItemPrice-module__content').text()
+        const link = `${DROM(element).find('a').attr('href')}`
 
-    //     mysql.query(`SELECT * FROM drom WHERE link = ? LIMIT 1`, [link],function(err, res){
-    //         if (err) throw err
-    //         if (res[0] != null) return console.log("false")
+        mysql.query(`SELECT * FROM drom WHERE link = ? LIMIT 1`, [link],function(err, res){
+            if (err) throw err
+            if (res[0] != null) return console.log("false")
 
-    //         botTrigger(`${name}\nЦена: ${price}\n${link}`)
-    //         mysqlInster('drom', name, link)
-    //    })
-    // })
+            botTrigger(`${name}\nЦена: ${price}\n${link}`)
+            mysqlInster('drom', name, link)
+       })
+    })
 
 
     function botTrigger(textBot){
